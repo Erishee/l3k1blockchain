@@ -1,0 +1,11 @@
+   		td{
+            width:10em;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            text-align: left;
+        }
+        th{
+            text-align: left;
+            vertical-align:middle;
+        }

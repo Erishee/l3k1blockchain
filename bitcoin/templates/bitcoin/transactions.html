@@ -1,0 +1,68 @@
+  {% extends 'accueil/base.html' %}
+  {% load static %}
+
+{% block title %}
+Transactions
+{% endblock %}
+
+{% block styles %}
+	<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/transactions.css' %}">
+	</head>
+{% endblock %}
+
+{% block body %}
+<body style="text-align: center">
+    <div class="container mb-3 mt-3">
+        <table class="table table-striped row-border table-hover mydatatable" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Transaction Hash</th>
+                    <th>Date</th>
+                    <th>Height</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for r in results %}
+                <tr>
+                    <td>{{r.hash_tx}}</td>
+                    <td>{{r.date}}</td>
+                    <td>{{r.hauteur}}</td>
+                    <td><a href="/bitcoin/portefeuille/{{r.adresse.adresse}}">{{r.adresse.adresse}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p></p>
+    <article>
+        <h2>Current time:{{current_time}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Current price:{{current_price}}</h2>
+    {% if fig_cours_BTC %}
+    {{ fig_cours_BTC|safe }}
+    {% else %}
+    <p>No graph was provided.</p>
+    {% endif %}
+    </article>
+    <hr>
+
+    <article>
+    {% if fig_tx_BTC %}
+    {{ fig_tx_BTC|safe }}
+    {% else %}
+    <p>No graph was provided.</p>
+    {% endif %}
+    </article>
+    <hr>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/datatable.js' %}"></script>
+</body>
+
+{% endblock%}
+
+
+

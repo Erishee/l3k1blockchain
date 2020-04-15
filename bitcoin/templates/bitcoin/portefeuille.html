@@ -1,0 +1,49 @@
+{% extends 'accueil/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block body %}
+
+<style type="text/css">
+	#infos{
+		width: 20%;
+		margin-left:50px;
+		margin-top:50px;
+		text-align: center;
+
+	}
+	#cardbody{
+		margin-bottom: -25px;
+	}
+</style>
+
+
+<div class="card mb-3" id="infos">
+  <h3 class="card-header">Utilisateur</h3>
+  <div class="card-body" id="cardbody">
+  	{% for u in utilisateurs %}
+    <h5 class="card-title">Adresse : </h5>
+   <p class="text-secondary">{{ u.adresse }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Transactions : {{u.nb_tx}}</li>
+    <li class="list-group-item">Total reçu : {{u.total_recu}}</li>
+    <li class="list-group-item">Total envoyé : {{ u.total_envoye}}</li>
+  </ul>
+  <div class="card-footer text-muted">
+    Solde final : {{ u.solde_final}}
+  </div>
+  {% endfor%}
+</div>
+
+
+ {% autoescape off %}
+  {{ plot_div }}
+  {% endautoescape %}
+
+
+{% endblock%}

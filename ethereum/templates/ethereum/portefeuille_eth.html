@@ -1,0 +1,48 @@
+ {% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}
+portefeuille_eth
+{% endblock %}
+
+  {% block body %}
+
+<style type="text/css">
+		#user{
+			margin-top: 10%;
+			float: left;
+			margin-left: 50px;
+			width: 50%;
+
+		}
+		#inputs{
+			float: right;
+			width:70%;
+			margin-top: 2%;
+		}
+
+	</style>
+
+
+
+	{% for u in user %}
+<div class="card border-primary mb-3" style="max-width: 20rem;" id="user">
+  <div class="card-header">Adresse</div>
+  <div class="card-body">
+    <h4 class="card-title">{{ u.adresse }}</h4>
+    <p class="card-text">{{u.eth_balance}}</p>
+  </div>
+</div>
+	{% endfor %}
+
+<div id='inputs'>
+	 {% autoescape off %}
+  {{ plot_div }}
+  {% endautoescape %}
+</div>
+  	 {% autoescape off %}
+  {{ plot_div2 }}
+  {% endautoescape %}
+
+
+{% endblock%}

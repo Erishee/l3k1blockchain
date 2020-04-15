@@ -1,0 +1,84 @@
+ {% extends 'layouts/base.html' %}
+ {% load static %}
+
+{% block title %}
+Ethereum
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bitcoin.css' %}">
+	
+
+{% endblock %}
+
+{% block body %}
+	<style type="text/css">
+	#top_utilisateurs{
+		margin:auto;
+		width:80%;
+		margin-top:5%;
+		text-align: center;
+	}	
+	h1 {
+		margin-top:5%;
+		text-align: center;
+	}
+	hr {
+		width: 85%
+	}
+
+
+</style>
+
+	<script>
+			function myFunction() {
+	  var input, filter, table, tr, td, i, txtValue,tbody;
+	  input = document.getElementById("inputSmall");
+	  filter = input.value;
+	  table = document.getElementById("myTable");
+	  tbody=table.getElementsByTagName("tbody");
+	  for (i = 0; i < tbody.length; i++) {
+	    td = tbody[i].getElementsByTagName("td")[0];
+	    if (td) {
+	      txtValue = td.textContent || td.innerText;
+	      value=parseFloat(txtValue);
+	      if (value >= filter) {
+	        tbody[i].style.display = "";
+	      } else {
+	        tbody[i].style.display = "none";
+	      }
+	    }       
+	  }
+	}
+	</script>
+
+<h1> Adresses possedant le plus d'ETH </h1>
+
+<hr>
+
+<div id="top_utilisateurs">
+	<label class="col-form-label col-form-label-sm" for="inputSmall" id="seuil">Veuillez inserer un seuil</label>
+  		<input class="form-control form-control-sm" type="number" placeholder="..." id="inputSmall" onkeyup="myFunction()">
+
+	<table class="table table-hover" id="myTable">
+	  <thead>
+	    <tr>
+	      <th scope="col">Adresse</th>
+	      <th scope="col">ETHEREUM Balance</th>
+	    </tr>
+	  </thead>
+	  {% for u in utilisateurs %}
+	  <tbody>
+	    <tr>
+	      <th scope="row"><a href="/ethereum/portefeuille/{{u.adresse}}">{{u.adresse}}</th>
+	      <td>{{u.eth_balance}}</td>
+	    </tr>
+	  </tbody>
+	  {% endfor %}
+	</table>
+</div>
+
+	
+
+{% endblock%}
+

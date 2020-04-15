@@ -1,0 +1,49 @@
+#titre {
+    font-weight: bold;
+    font-size: 16px;
+}
+table.table{
+    font-size: 14px;
+}
+.list-group {
+    height: 40px;
+    text-align: center;
+    width: 330px;
+    font-size: 14px;
+    float: right ;
+    margin-right: 30px;
+    height: auto;
+    margin-top: 50px;
+}
+.list-group-item{
+    margin-top: 2px;
+}
+#tab_wrapper{
+    float: left;
+    margin-left: 30px;
+    margin-top: 50px;
+    width:600px;
+}
+.blcinfo-container{
+    width: 100%;
+    height: auto;
+}
+#gauche{
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height:30px;
+    background-color:#ffffff;
+    height:auto;
+    width:400px;
+    float:left;
+    padding:5px;
+}
+#droite{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 100px;
+    width:920px;
+    float:right;
+    padding:10px;
+}
