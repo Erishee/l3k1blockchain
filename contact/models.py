@@ -7,5 +7,5 @@ class Contact(models.Model):
 	email = models.EmailField()
 	message = models.TextField()
 
-	def 	__str__(self):
+	def __str__(self):
 		return f'{self.first_name} {self.last_name}'

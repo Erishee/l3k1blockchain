@@ -11,7 +11,10 @@ def contact(request):
 		print(first_name,last_name,email,message)
 		contact = Contact(first_name=first_name,last_name=last_name,email=email,message=message)
 		contact.save()
-	return render(request,'contact.html')
+	return render(request,'contact/contact.html')
 
 def contact2(request):
 	return render(request, 'contact/contact.html')
+
+def about(request):
+	return render(request, 'contact/aboutus.html')

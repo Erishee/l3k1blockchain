@@ -10,7 +10,7 @@
     padding:5px;
     text-align: center;
     font-family:Arial;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 25px;
 }
 .card-header{
@@ -35,3 +35,12 @@ div.dataTables_wrapper {
     border-collapse: separate;
     border-spacing: 0;
     }
+
+h1{
+    text-align: center;
+}
+
+
+hr {
+    width:85%;
+}

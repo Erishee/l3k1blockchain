@@ -1,4 +1,4 @@
- {% extends 'accueil/base.html' %}
+ {% extends 'layouts/base.html' %}
  {% load static %}
 
 {% block title %}
@@ -9,17 +9,27 @@ Bitcoin
 
 {% block styles %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bitcoin.css' %}">
- 	<link rel="stylesheet" type="text/css" href="{% static 'css/button.css' %}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
  {% endblock %}
 
 {% block body %}
-		<div id="buttonbody">
-	 	<a href="{% url 'blockchain_info'%}" class="button">Blockchain Info</a>
-		<a href="{% url 'transaction_info'%}" class="button gray" class="gray">Transaction Info</a>
-		</div>
+
+    <style type="text/css">
+        h1{
+            text-align: center;
+            margin-top: 5%;
+        }
+        hr{
+            width: 85%;
+            margin-bottom: 5%;
+        }
+    </style>
+    <h1>Adresses bitcoin</h1>
+
+    <hr>
+
   <div id="btc_container">
 	 <div id="left">
 		<div class="card-header">Utilisateur le plus riche</div>

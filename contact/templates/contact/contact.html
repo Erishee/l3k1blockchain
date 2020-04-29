@@ -1,4 +1,4 @@
- {% extends 'accueil/base.html' %}
+ {% extends 'layouts/base.html' %}
  {% load static %}
 
 {% block title %}
@@ -18,64 +18,6 @@
 {% block body %}
 
 <body>
-<!-- Team Members -->
-    <h1>Our Team</h1>
-    <div class="row-1">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100 text-center">
-          <img class="card-img-top" src="http://placehold.it/750x450" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Team Member</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Position</h6>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#">name@example.com</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100 text-center">
-          <img class="card-img-top" src="http://placehold.it/750x450" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Team Member</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Position</h6>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#">name@example.com</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100 text-center">
-          <img class="card-img-top" src="http://placehold.it/750x450" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Team Member</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Position</h6>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#">name@example.com</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100 text-center">
-          <img class="card-img-top" src="http://placehold.it/750x450" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Team Member</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Position</h6>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#">name@example.com</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
-
   <form accept="contact" method="post">{% csrf_token %}
     <div class="container contact">
       <div class="row">

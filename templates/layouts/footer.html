@@ -1,0 +1,15 @@
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
+{% endblock %}
+
+ <footer class="footer">
+      <div class="container">
+        <div class="footer-text">
+          Si vous avez des question, n'hesitez pas de <a href="{% url 'contact'%}">nous contacter</a> !
+          <button id="totop"  onclick="topFunction()" title="Go to top">Top</button>
+        </div>
+      </div>
+    </footer>
+<script type="text/javascript" src="{% static 'js/footer.js' %}"></script>

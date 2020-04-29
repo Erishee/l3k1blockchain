@@ -1,6 +1,6 @@
-$('#tab').DataTable({
+$('#tab ').DataTable({
     "ordering": false,
     "info":false,
-    lengthMenu:[25, 50,100],
-    pageLength: 25,
+    lengthMenu:[10, 20,50],
+    pageLength: 20,
 });

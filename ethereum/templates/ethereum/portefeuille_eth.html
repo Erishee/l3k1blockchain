@@ -9,16 +9,24 @@ portefeuille_eth
 
 <style type="text/css">
 		#user{
-			margin-top: 10%;
-			float: left;
-			margin-left: 50px;
-			width: 50%;
+			margin-top: 100px;
+			margin-left: 80px;
+      		display: inline-block;
+			
 
 		}
 		#inputs{
-			float: right;
-			width:70%;
-			margin-top: 2%;
+			display: inline-block;
+      		width:70%;
+      		float:right;
+			
+		}
+		#connexions{
+			display: inline-block;
+      		width:80%;
+      		text-align: center;
+      		margin-left: 10%;
+
 		}
 
 	</style>
@@ -40,9 +48,11 @@ portefeuille_eth
   {{ plot_div }}
   {% endautoescape %}
 </div>
+
+<div id='connexions'>
   	 {% autoescape off %}
   {{ plot_div2 }}
   {% endautoescape %}
-
+</div>
 
 {% endblock%}

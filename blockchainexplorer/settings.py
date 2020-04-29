@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'accueil',
     'bitcoin',
     'contact',
     'ethereum',
+    'myapi.apps.MyapiConfig',
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'blockchainexplorer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [''],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,6 +102,14 @@ DATABASES = {
         'TEST': {
             'MIRROR': 'default',
         },
+    },
+    'ethereum':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'samtifshen',
+        'HOST': 'ethereum.caqj07wtufhq.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 

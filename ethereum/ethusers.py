@@ -8,6 +8,12 @@ from holoviews import opts, dim
 from bokeh.io import show
 from bokeh.embed import file_html
 from bokeh.resources import CDN
+import networkx as nx
+import plotly.graph_objs as go
+from plotly.graph_objs import Scatter
+from plotly.offline import plot 
+
+
 
 class EthUsers:
 
@@ -15,7 +21,7 @@ class EthUsers:
 
 	def get_allusers():
 		liste=[]
-		utilisateurs=Utilisateur.objects.db_manager('ethereum').raw("SELECT * from utilisateur")
+		utilisateurs=Utilisateur.objects.db_manager('ethereum').raw("SELECT * from utilisateur_eth")
 		for u in utilisateurs:
 			d=dict()
 			d["adresse"]=u.address
@@ -29,7 +35,7 @@ class EthUsers:
 
 	def get_users():
 		utilisateurs=[]
-		result=Utilisateur.objects.db_manager('ethereum').raw("SELECT * from utilisateur LIMIT 200")
+		result=Utilisateur.objects.db_manager('ethereum').raw("SELECT * from utilisateur_eth LIMIT 200")
 		for r in result:
 			utilisateurs.append(r.address)
 		return utilisateurs
@@ -42,7 +48,7 @@ class EthUsers:
 	def echanges(utilisateurs):
 		echanges=[]
 		for u in utilisateurs:
-			result=Transactions.objects.db_manager('ethereum').raw("SELECT * from transactions WHERE source=%s",[u])
+			result=Transactions.objects.db_manager('ethereum').raw("SELECT * from transactions_eth WHERE source=%s",[u])
 			for r in result:
 				if r.destination in utilisateurs:
 					e=(r.source,r.destination,r.value)
@@ -113,5 +119,69 @@ class EthUsers:
 		for d in dates:
 			liste.append(datetime.fromtimestamp(d.timestamp_field))
 		return liste 
+
+# retourne la la liste de tous les utilisateurs avec qui un utilisateur a echangé 
+# adresse : adresse de l'utilisateur pour lequel on veut recuperer les echanges
+
+	def echanges(adresse):
+		liste=[]
+		dest=Transactions.objects.db_manager('ethereum').raw("SELECT * from transactions WHERE source = %s",[adresse])
+		for d in dest:
+			liste.append(d.destination)
+		source=Transactions.objects.db_manager('ethereum').raw("SELECT * from transactions WHERE destination = %s",[adresse])
+		for s in source:
+			liste.append(s.source)
+		return liste
+
+#méthode permettant de construire le graphe en étoile 
+#représente les echanges d'une adresse avec d'autres utilisateurs 
+
+	def connexions(echanges,adresse):
+		edge_x=[]
+		edge_y=[]
+		G = nx.star_graph(len(echanges))
+		pos = nx.spring_layout(G)
+		nx.set_node_attributes(G, pos, 'pos')
+		for edge in G.edges():
+			x0, y0 = G.nodes[edge[0]]['pos']
+			x1, y1 = G.nodes[edge[1]]['pos']
+			edge_x.append(x0)
+			edge_x.append(x1)
+			edge_x.append(None)
+			edge_y.append(y0)
+			edge_y.append(y1)
+			edge_y.append(None)
+		edge_trace = go.Scatter(x=edge_x, y=edge_y,line=dict(width=0.5, color='#888'),hoverinfo='none',mode='lines')  
+		node_x=[]
+		node_y=[]
+		for node in G.nodes():
+			x, y = G.nodes[node]['pos']
+			node_x.append(x)
+			node_y.append(y)
+		node_trace = go.Scatter(x=node_x, y=node_y,mode='markers',hoverinfo='text')
+		node_adresses =[]
+		node_values = []
+		node_text=[adresse]
+		for e in echanges:
+			node_values.append(4)
+			node_text.append(e)
+		node_trace.marker.size = node_values
+		node_trace.text = node_text		
+		fig = go.Figure(data=[edge_trace, node_trace],
+		             layout=go.Layout(
+		                title='<br>Echanges avec les utilisateurs',
+		                titlefont_size=16,
+		                showlegend=False,
+		                hovermode='closest',
+		                margin=dict(b=20,l=5,r=5,t=40),
+		                annotations=[ dict(
+		                    showarrow=False,
+		                    xref="paper", yref="paper",
+		                    x=0.005, y=-0.002 ) ],
+		                xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+		                yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
+		                )
+		plot_div2= plot(fig, output_type='div',include_plotlyjs=False)
+		return plot_div2
 
 

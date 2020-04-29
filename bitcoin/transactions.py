@@ -22,17 +22,20 @@ import ssl
 
 class Transaction:
 
+    #méthode pour convertir le timestamps en temps réel
     @staticmethod
     def convert_timestamps(t):
         date = datetime.fromtimestamp(t)
         new = str(date.year) + "-" + str(date.month) + "-" + str(date.day)
         return new
 
+    #récupérer toutes les transactions par ORM ordonée par date
     @staticmethod
     def get_all_tx():
         tx = Transactions.objects.all().order_by('date').select_related('adresse')
         return tx
 
+    #récupérer le temps de ce moment
     @staticmethod
     def get_current_time():
         time_now = date.today()
@@ -41,6 +44,7 @@ class Transaction:
         current_time = now.strftime("%Y-%m-%d %H:%M:%S")
         return current_time
 
+    #récupérer le cours BTC par l'API du site cryptocompare
     @staticmethod
     def get_current_price():
         ssl._create_default_https_context = ssl._create_unverified_context
@@ -52,6 +56,7 @@ class Transaction:
         current_price = current_price_json[u'USD']
         return current_price
 
+    #Méthode retourne un dictionnaire avec date la clé et nombre de fois la valeur.
     @staticmethod
     def get_date_tx(transactions):
         Dict = {}

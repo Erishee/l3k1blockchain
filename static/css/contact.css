@@ -16,7 +16,7 @@ h1{
 }
 
 body{
-	background-color: #25274d;
+	background-color: #1a1a1a;
 }
 .contact{
 	padding: 4%;
@@ -47,7 +47,7 @@ body{
 	font-weight:600;
 }
 .contact-form button{
-	background: #25274d;
+	background: #1a1a1a;
 	color: #fff;
 	font-weight: 600;
 	width: 25%;

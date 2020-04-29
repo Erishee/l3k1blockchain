@@ -1,26 +1,15 @@
-{% extends 'accueil/base.html' %}
+{% extends 'layouts/base.html' %}
+{% load static %}
+
 
 {% block title %}
 {% endblock %}
 
 {% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/portefeuille.css' %}">
 {% endblock %}
 
 {% block body %}
-
-<style type="text/css">
-	#infos{
-		width: 20%;
-		margin-left:50px;
-		margin-top:50px;
-		text-align: center;
-
-	}
-	#cardbody{
-		margin-bottom: -25px;
-	}
-</style>
-
 
 <div class="card mb-3" id="infos">
   <h3 class="card-header">Utilisateur</h3>
@@ -40,10 +29,10 @@
   {% endfor%}
 </div>
 
-
+<div id="graphe_inputs">
  {% autoescape off %}
   {{ plot_div }}
   {% endautoescape %}
-
+</div>
 
 {% endblock%}

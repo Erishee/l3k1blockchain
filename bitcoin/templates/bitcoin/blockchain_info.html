@@ -1,4 +1,4 @@
- {% extends 'accueil/base.html' %}
+{% extends 'layouts/base.html' %}
 {% load static %}
 
 {% block title %}
@@ -12,25 +12,16 @@ Blockchain info
         block_bitcoin
     </title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/blockchain.css' %}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
 </head>
 {% endblock %}
 
 {% block body %}
-<body>
-    <div class="blcinfo-container">
-        <div id="gauche">
-            <ul class="list-group">
-                <li class="list-group-item" id="titre">Top 20 mineurs</li>
-                {% for t in top_20 %}
-                <li class="list-group-item"><a href="/bitcoin/portefeuille/{{ t.adresse }}">{{ t.adresse }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div id="droite">
+<body style="text-align: center">
+    <article>
+        <p></p>
+        <h1>Blockchain Info</h1>
+        <hr>
+    <div class="container mb-3 mt-3">
             <table class="table table-hover table-striped" id="tab" style="width:70%">
                 <thead>
                     <tr>
@@ -51,14 +42,31 @@ Blockchain info
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
     </div>
-</body>
+    </article>
+    <hr>
+    <article>
+        <p></p>
+        <h1>Top 20 Utilisateurs</h1>
+        <hr>
+        <div class="top_20_container">
+            {% for u in top_20 %}
+                <div class="block_txt" style="display: inline"><a href="/bitcoin/portefeuille/{{u.adresse}}">{{u.adresse}}</a></div>
+                &emsp;&emsp;&emsp;&emsp;
+                {% if forloop.counter|divisibleby:2 %}
+                </br>
+                <p></p>
+                {% endif %}
+            {% endfor %}
+            <hr>
+        </div>
+    </article>
+
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="{% static 'js/pagination.js' %}"></script>
+</body>
 
 {% endblock%}
-

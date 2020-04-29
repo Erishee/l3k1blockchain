@@ -5,8 +5,64 @@
 transactions_eth
 {% endblock %}
 
-  {% block body %}
+{% block styles %}
+ 	<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/transactions_eth.css' %}">
+	</head>
+{% endblock %}
 
- <h1>transactions_eth</h1>
+{% block body %}
+<body style="text-align: center">
+    <div class="container mb-3 mt-3">
+        <table id="eth_table" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Transaction Hash</th>
+                    <th>Date</th>
+                    <th>Block Number</th>
+                    <th>Address Source</th>
+                    <th>Address Destination</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for tx_eth in txs_eth %}
+                <tr>
+                    <td>{{tx_eth.hash_field}}</td>
+                    <td>{{tx_eth.timestamp_field}}</td>
+                    <td>{{tx_eth.block_number}}</td>
+                    <td><a href="/ethereum/portefeuille/{{tx_eth.source}}">{{tx_eth.source}}</td>
+                    <td><a href="/ethereum/portefeuille/{{tx_eth.destination}}">{{tx_eth.destination}}</td>
+                    <td>{{tx_eth.value}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p></p>
+    <article>
+    <h2>Current time:{{current_time_eth}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Current price:{{current_price_eth}}</h2>
+    {% if fig_cours_ETH %}
+    {{ fig_cours_ETH|safe }}
+    {% else %}
+    <p>No graph was provided.</p>
+    {% endif %}
+    </article>
+    <hr>
 
+    <article>
+    {% if fig_tx_ETH %}
+    {{ fig_tx_ETH|safe }}
+    {% else %}
+    <p>No graph was provided.</p>
+    {% endif %}
+    </article>
+    <hr>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/eth_scroll.js' %}"></script>
+</body>
 {% endblock%}

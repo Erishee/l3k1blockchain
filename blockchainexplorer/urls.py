@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('accueil.urls')),
     path('bitcoin/', include('bitcoin.urls')),
     path('contact/', include('contact.urls')),
+    path('api',include('myapi.urls')),
     ###
     path('ethereum/', include('ethereum.urls')),
     path('__debug__/', include(debug_toolbar.urls)),

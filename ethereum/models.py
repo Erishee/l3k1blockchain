@@ -16,8 +16,8 @@ class Transactions(models.Model):
     value = models.FloatField(blank=True, null=True)
 
     class Meta:
-        managed = False
-        db_table = 'transactions'
+        managed = True
+        db_table = 'transactions_eth'
 
 
 class Utilisateur(models.Model):
@@ -25,5 +25,5 @@ class Utilisateur(models.Model):
     eth_balance = models.CharField(max_length=300, blank=True, null=True)
 
     class Meta:
-        managed = False
-        db_table = 'utilisateur'
+        managed = True
+        db_table = 'utilisateur_eth'
