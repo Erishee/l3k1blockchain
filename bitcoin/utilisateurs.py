@@ -1,6 +1,12 @@
 from bitcoin.models import Utilisateur
+from bitcoin.models import Inputs
 import math
 from collections import OrderedDict 
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
+from datetime import datetime
+import plotly.graph_objs as go
+
 
 class Utilisateurs: 
 
@@ -15,16 +21,6 @@ class Utilisateurs:
 	def ftoi(n):
 		return math.floor(n)
 
-# méthode permettant de recuperer les plus gros utilisateurs de bitcoins 
-# prend en paramètre le seuil 
-# retourne un tableau contenant les utilisateurs possédant plus de n bitcoins 
-
-	def biggest_users(n):
-		n=Utilisateurs.btos(n)
-		query='SELECT * FROM utilisateur WHERE solde_final > %s'%n
-		utilisateurs=Utilisateur.objects.raw(query)
-		return utilisateurs
-
 # méthode retournant une liste de  dictionnaire de tous les utilisateurs 
 # elle permettra de recuperer le plus riche des utilisateurs 
 
@@ -35,6 +31,9 @@ class Utilisateurs:
 		for u in utilisateur:
 			d=dict()
 			d["adresse"]=u.adresse
+			d["nb_tx"]=u.nb_tx
+			d["total_envoye"]=u.total_envoye
+			d["total_recu"]=u.total_recu
 			d["solde_final"]=u.solde_final
 			liste.append(d)
 			d=None 
@@ -71,3 +70,36 @@ class Utilisateurs:
 		user["nb_tx"]= u.nb_tx
 		l.append(user)
 		return l
+
+
+#methode permettant de récuperer les inputs d'un utilisateur (tout ce qu'il a envoyé)
+#ainsi que la date à laquelle il a envoyé ses bitcoins  
+	def get_inputs(adresse):
+		date_inputs=[]
+		valeur_i=[]
+		inputs=Inputs.objects.raw("SELECT * from inputs WHERE adresse= %s ORDER BY date",[adresse])
+		for i in inputs:
+			date_inputs.append(datetime.fromtimestamp(i.date))
+			valeur_i.append(Utilisateurs.stob(i.valeur_i))
+		return date_inputs,valeur_i
+
+#méthode permettant de dessiner le graphe 
+	def plot_inputs(dates,valeurs):
+		fig=go.Figure()
+		scatter=go.Scatter(x=dates, y=valeurs, mode='lines', name='test', opacity=0.8, marker_color='green')
+		fig.add_trace(scatter)
+		fig.update_xaxes(rangeslider_visible=True,
+    		rangeselector=dict(
+        	buttons=list([
+	            dict(count=1, label="1m", step="month", stepmode="backward"),
+	            dict(count=6, label="6m", step="month", stepmode="backward"),
+	            dict(count=1, label="YTD", step="year", stepmode="todate"),
+	            dict(count=1, label="1y", step="year", stepmode="backward"),
+	            dict(step="all")
+        		])
+    		),
+		)
+		fig.update_layout(title="Btc sent over time",xaxis_title="Date",yaxis_title="BTC")
+		plot_div=plot(fig,output_type='div')
+		return plot_div
+

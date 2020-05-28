@@ -25,7 +25,7 @@ SECRET_KEY = '4y=^aupsu!x&juz$=3pxfdf4_n(rm7gx=(7w&z+q(rywv0#-q4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -44,7 +44,11 @@ INSTALLED_APPS = [
     'contact',
     'ethereum',
     'myapi.apps.MyapiConfig',
-    "rest_framework"
+    "rest_framework",
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'channels',
+    'channels_redis'
+
 ]
 
 MIDDLEWARE = [
@@ -91,16 +95,8 @@ DATABASES = {
         'PASSWORD': 'samtifshen',
         'HOST': 'l3k1blockchain.caqj07wtufhq.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
-    },
-    'replica': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'samtifshen',
-        'PASSWORD': 'samtifshen',
-        'HOST': 'l3k1blockchain.caqj07wtufhq.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
         'TEST': {
-            'MIRROR': 'default',
+            'NAME': 'bitcoin',
         },
     },
     'ethereum':{
@@ -110,6 +106,9 @@ DATABASES = {
         'PASSWORD': 'samtifshen',
         'HOST': 'ethereum.caqj07wtufhq.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
+        'TEST': {
+            'NAME': 'ethereum',
+        },
     }
 }
 
@@ -148,6 +147,28 @@ USE_TZ = True
 
 #pour le test
 IS_TESTING = True
+
+ASGI_APPLICATION='blockchainexplorer.routing.application'
+
+CHANNELS_LAYERS={
+    'default':{
+        'BACKEND':'channels_redis.core.RedisChannelLayer',
+        'CONFIG':{
+            'host':[('127.0.0.1',6379),],
+        }
+    }
+}
+
+PLOTLY_COMPONENTS=[
+    'dash_core_components',
+    'dash_html_components',
+    'dash_renderer',
+    'dpd_components',
+
+]
+
+X_FRAME_OPTIONS='SAMEORIGIN'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

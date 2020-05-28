@@ -1,11 +1,28 @@
-   		td{
-            width:10em;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
-            text-align: left;
-        }
-        th{
-            text-align: left;
-            vertical-align:middle;
-        }
+td{
+	width:10em;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	text-align: left;
+}
+
+th{
+	text-align: left;
+	vertical-align:middle;
+}
+
+body {
+	text-align: center;
+}
+
+h2, h1 {
+	text-align: center;
+}
+
+article {
+	margin-left: 50px;
+}
+
+#main_container {
+	margin-top: 50px;
+}

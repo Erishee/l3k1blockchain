@@ -1,5 +1,6 @@
- {% extends 'layouts/base.html' %}
+{% extends 'layouts/base.html' %}
 {% load static %}
+{% load plotly_dash %}
 
 {% block title %}
 portefeuille_eth
@@ -12,6 +13,7 @@ portefeuille_eth
 			margin-top: 100px;
 			margin-left: 80px;
       		display: inline-block;
+      		text-align: center;
 			
 
 		}
@@ -28,6 +30,10 @@ portefeuille_eth
       		margin-left: 10%;
 
 		}
+		h4{
+			font-size: 12px;
+		}
+
 
 	</style>
 
@@ -35,10 +41,10 @@ portefeuille_eth
 
 	{% for u in user %}
 <div class="card border-primary mb-3" style="max-width: 20rem;" id="user">
-  <div class="card-header">Adresse</div>
+  <div class="card-header">User</div>
   <div class="card-body">
-    <h4 class="card-title">{{ u.adresse }}</h4>
-    <p class="card-text">{{u.eth_balance}}</p>
+    <p class="card-text">Address : {{ u.adresse }}</p>
+    <p class="card-text">Ethereum balance : {{u.eth_balance}} ETH </p>
   </div>
 </div>
 	{% endfor %}
@@ -50,9 +56,7 @@ portefeuille_eth
 </div>
 
 <div id='connexions'>
-  	 {% autoescape off %}
-  {{ plot_div2 }}
-  {% endautoescape %}
+  	{% plotly_app name='connexions' ratio=1 %}
 </div>
 
 {% endblock%}

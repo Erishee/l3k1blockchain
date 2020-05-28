@@ -6,10 +6,7 @@
     text-align: center;
 }
 .top_20_container{
-    margin-left: 200px;
-    margin-right: 200px;
     width:100%;
-    float: left;
     font-size: 20px;
     padding-right: 300px;
     float: left;
@@ -17,4 +14,8 @@
 }
 .col-md-5{
     float:left;
+}
+
+.main-svg{
+    margin-left: 280px;
 }

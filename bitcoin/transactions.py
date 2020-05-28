@@ -6,7 +6,6 @@ import psycopg2
 import datetime
 import urllib, json
 import urllib.request
-import psycopg2
 import datetime
 from datetime import datetime
 import csv
@@ -17,6 +16,9 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from bitcoin.models import Transactions
 import ssl
+from plotly.offline import plot
+import plotly.graph_objs as go
+from plotly.graph_objs import Scatter
 
 
 
@@ -66,6 +68,46 @@ class Transaction:
             else:
                 Dict[result.date] += 1
         return Dict
+
+#methode permettant d'afficher le cours du btc sur un graphe 
+    def fig_cours_BTC(data):
+        fig1 = go.Figure()
+        fig1.add_trace(go.Scatter(  x=data['Date'],
+                                y=data['Closing Price (USD)'],
+                                name="cours_BTC",
+                                ))
+        fig1.layout.update( title="Bitcoin Price",
+                        xaxis_title="Date",
+                        yaxis_title="Price($)",
+                        font=dict(
+                        family="Courier New, monospace",
+                        size=18,
+                        color="#7f7f7f"
+                        ))
+        fig_cours_BTC = fig1.to_html(full_html=False)
+        return fig_cours_BTC
+
+#methode permettant d'afficher les transactions sur un graphe 
+    def fig_tx_BTC(Dict):
+        from_date = list(Dict.keys())[0]
+        to_date = list(Dict.keys())[-1]
+        fig2 = go.Figure()
+        fig2.add_trace(go.Scatter(  x=list(Dict.keys()),
+                                y=list(Dict.values()),
+                                name="tx_BTC",
+                                ))
+        fig2.layout.update(
+            title="Bitcoin Transaciton By Date",
+            xaxis_title="Date",
+            yaxis_title="Transaction number",
+            font=dict(
+                family="Courier New, monospace",
+                size=18,
+                color="#7f7f7f"
+                ))
+        fig_tx_BTC = fig2.to_html(full_html=False)
+        return fig_tx_BTC
+
 
 
 

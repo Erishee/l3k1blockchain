@@ -2,7 +2,7 @@
  {% load static %}
 
 {% block title %}
-Bitcoin
+Bitcoin addresses
 {% endblock %}
 
 
@@ -26,20 +26,20 @@ Bitcoin
             margin-bottom: 5%;
         }
     </style>
-    <h1>Adresses bitcoin</h1>
+    <h1>Bitcoin addresses</h1>
 
     <hr>
 
   <div id="btc_container">
 	 <div id="left">
-		<div class="card-header">Utilisateur le plus riche</div>
+		<div class="card-header">Richest user</div>
                           <div class="card-body">
 							{% for u in user %}
                             <p class="card-text">Address:<br /> <a href="/bitcoin/portefeuille/{{u.adresse}}">{{ u.adresse }}</a></p>
                             <p class="card-text">Total sent:<br /> {{ u.total_envoye }}</p>
                             <p class="card-text">Total received:<br /> {{ u.total_recu }}</p>
                             <p class="card-text">Balance:<br /> {{ u.solde_final }}</p>
-                            <p class="card-text">Transaction number:<br /> {{ u.nb_tx }}</p>
+                            <p class="card-text">Number of transactions:<br /> {{ u.nb_tx }}</p>
                             {% endfor %}
                          </div>
                 </div>
@@ -49,11 +49,11 @@ Bitcoin
          <table border="0" cellspacing="5" cellpadding="5">
             <tbody>
                 <tr>
-                    <td>Minimum solde final:</td>
+                    <td>Minimum final balance :</td>
                     <td><input type="text" id="min" name="min"></td>
                 </tr>
                 <tr>
-                    <td>Maximum solde final:</td>
+                    <td>Maximum final balance :</td>
                     <td><input type="text" id="max" name="max"></td>
                 </tr>
             </tbody>
@@ -61,11 +61,11 @@ Bitcoin
 		<table id="btc_table" class="display nowrap" style="width:100%">
         <thead>
             <tr>
-                <th>Adresse</th>
-                <th>Nombre de transaction</th>
-                <th>Total reçu</th>
-                <th>Total envoyé</th>
-                <th>Solde Final</th>
+                <th>Address</th>
+                <th>Number of transactions</th>
+                <th>Total received</th>
+                <th>Total sent</th>
+                <th>Final balance</th>
             </tr>
         </thead>
         <tbody>

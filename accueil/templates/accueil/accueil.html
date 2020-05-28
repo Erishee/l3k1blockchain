@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Accueil
+Home
 {% endblock %}
 
 {% block styles %}  
@@ -19,16 +19,31 @@ Accueil
 	hr{
 		width: 85%;
 	}
-	#chord_eth{
-		top:120%;
-		left:30%;
-	}
 	#echanges{
 		margin-top: 40%;
 	}
+	#chord{
+		display: block;
+		padding: 2% 2%;
+		background-color: #f0f0f0;
+		margin-left: 10%;
+		float:left;
+		margin-top: 30px;
+
+	}
+	#tab{
+		border:5px solid #f0f0f0;
+		height:790px;
+		margin-right: 10%;
+		float: right;
+		width: 25%;
+		height: 790px;
+		margin-top: 30px;
+		
+	}
 </style>
 
-<h1>Evolution du cours des crypto-monnaies</h1>
+<h1>Crypto-currencies' price</h1>
 <hr>
 <div div id="cours">
 	<div id="nav">
@@ -56,21 +71,22 @@ Accueil
 </div>
 
 <div id="echanges">
-	<h1>Echanges entre les utilisateurs</h1>
+	<h1>Exchanges between users</h1>
 	<hr> 
-	<div id="chord_btc">
-		{% autoescape off %}
-		{{ chord }}
-		{% endautoescape %}
-	</div>
-
+		<div id="chord">
+			<p>Chord diagram</p>
+			{% autoescape off %}
+				{{ chord }}
+			{% endautoescape %}
+			{{chord_graph|safe}}
+		</div>
 	<div>
         <table class="table table-hover table-striped table-responsive" id="tab">
 		    <thead>
                 <tr>
                     <th>Source</th>
-                    <th>Destination</th>
-                    <th>Valeur</th>
+                    <th>Receiver</th>
+                    <th>Value</th>
                     <th>Date</th>
                  </tr>
                 </thead>
@@ -87,10 +103,6 @@ Accueil
                 </tbody>
             </table>
 	</div>
-</div>
-
-<div id="chord_eth">
-{{chord_graph|safe}}
 </div>
 {% endblock%}
 

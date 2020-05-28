@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}
+API
+{% endblock %}
+
+ {% block body %}
+<body>
+</br>
+
+<style type="text/css">
+    hr{
+        width:75%;
+    }
+    h1{
+        margin-top: 2%;
+    }
+    h2{
+        margin-top: 3%;
+    }
+</style>
+ <div class="intro" style="text-align: center" >
+     <h1>Transactions & Blocks Data</h1>
+     <h2>Blockchain Data API</h2>
+     </p>
+     Query JSON data on blocks and transactions. Almost all the data you see on this website is available in JSON format.</p>
+     You can also request the block to return in json by adding ?format=json at the end.</p>
+         <hr/>
+             View API page :<a href="http://localhost:8000/api">http://localhost:8000/api</a></p>
+             You can do POST, PUT, GET, DELETE requests.
+         <hr/>
+         <h4>To Query a Single Block :</h4></p>
+             http://localhost:8000/apiBTC_Bloc/$block_height</p>
+         <hr/>
+         <h4>To Query a Single Transaction :</h4></p>
+             http://localhost:8000/apiBTC_Transations/$tx_hash</p>
+         <hr/>
+         <h4>To Query a Single User :</h4></p>
+             http://localhost:8000/apiBTC_Utilisateur/$user_address</p>
+         <hr/>
+ </div>
+ </body>
+{% endblock%}

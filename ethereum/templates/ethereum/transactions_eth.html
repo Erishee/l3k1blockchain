@@ -1,8 +1,8 @@
- {% extends 'layouts/base.html' %}
+{% extends 'layouts/base.html' %}
 {% load static %}
 
 {% block title %}
-transactions_eth
+Ethereum transactions
 {% endblock %}
 
 {% block styles %}
@@ -15,9 +15,10 @@ transactions_eth
 {% endblock %}
 
 {% block body %}
-<body style="text-align: center">
+<body>
+    <h1>Ethereum transactions</h1>
     <div class="container mb-3 mt-3">
-        <table id="eth_table" class="display nowrap" style="width:100%">
+        <table class="table table-striped row-border table-hover table-sm table-responsive mydatatable" id="tab">
             <thead>
                 <tr>
                     <th>Transaction Hash</th>
@@ -32,19 +33,28 @@ transactions_eth
             {% for tx_eth in txs_eth %}
                 <tr>
                     <td>{{tx_eth.hash_field}}</td>
-                    <td>{{tx_eth.timestamp_field}}</td>
+                    <td id="date">{{tx_eth.timestamp_field}}</td>
                     <td>{{tx_eth.block_number}}</td>
-                    <td><a href="/ethereum/portefeuille/{{tx_eth.source}}">{{tx_eth.source}}</td>
-                    <td><a href="/ethereum/portefeuille/{{tx_eth.destination}}">{{tx_eth.destination}}</td>
+                    <td>{{tx_eth.source}}</td>
+                    <td>{{tx_eth.destination}}</td>
                     <td>{{tx_eth.value}}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-    <p></p>
     <article>
-    <h2>Current time:{{current_time_eth}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Current price:{{current_price_eth}}</h2>
+    {% if fig_radar_chart %}
+    {{ fig_radar_chart|safe }}
+    {% else %}
+    <p>No graph was provided.</p>
+    {% endif %}
+    </article>
+    <article>
+    <h1><small>Biggest ETH transaction within 24h</small></h1>
+    <h2><small>hash:{{Biggest_tx_24h_hash}}</small></h2>
+    <h2><small>value(USD$):{{Biggest_tx_24h_value}}</small></h2>
+    <hr>
     {% if fig_cours_ETH %}
     {{ fig_cours_ETH|safe }}
     {% else %}
@@ -63,6 +73,6 @@ transactions_eth
     <hr>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/eth_scroll.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/pagination_eth.js' %}"></script>
 </body>
 {% endblock%}

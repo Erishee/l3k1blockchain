@@ -16,18 +16,29 @@ Blockchain info
 {% endblock %}
 
 {% block body %}
+<style type="text/css">
+    #binfos{
+        margin-top: 5%;
+    }
+    hr{
+        width: 85%;
+    }
+    #miners{
+        margin-top:3%;
+    }
+</style>
 <body style="text-align: center">
     <article>
         <p></p>
-        <h1>Blockchain Info</h1>
+        <h1 id="binfos">Blockchain information</h1>
         <hr>
     <div class="container mb-3 mt-3">
             <table class="table table-hover table-striped" id="tab" style="width:70%">
                 <thead>
                     <tr>
-                        <th>Hauteur</th>
-                        <th>Hachage</th>
-                        <th>Mineur</th>
+                        <th>Height</th>
+                        <th>Hash</th>
+                        <th>Miner</th>
                         <th>Transactions</th>
                     </tr>
                 </thead>
@@ -44,20 +55,15 @@ Blockchain info
             </table>
     </div>
     </article>
-    <hr>
+    <hr id="miners">
     <article>
         <p></p>
-        <h1>Top 20 Utilisateurs</h1>
+        <h1>Top miners</h1>
         <hr>
         <div class="top_20_container">
-            {% for u in top_20 %}
-                <div class="block_txt" style="display: inline"><a href="/bitcoin/portefeuille/{{u.adresse}}">{{u.adresse}}</a></div>
-                &emsp;&emsp;&emsp;&emsp;
-                {% if forloop.counter|divisibleby:2 %}
-                </br>
-                <p></p>
-                {% endif %}
-            {% endfor %}
+            {% autoescape off %}
+            {{ plot_div }}
+            {% endautoescape %}
             <hr>
         </div>
     </article>

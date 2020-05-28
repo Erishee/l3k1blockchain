@@ -48,12 +48,6 @@
 	height: 100%;
 }
 
-#chord_eth{
-    position: absolute;
-    bottom: 30%;
-    left: 40%;
-}
-
 #tab{
     margin-top: 30px;
     width: 25%;
@@ -62,9 +56,7 @@
     margin-right: 50px;
 }
 
-
-
-#chord_btc{
+#chord{
     margin-top: 30px;
     float: left;
     margin-left: 50px;

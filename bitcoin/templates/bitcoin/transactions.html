@@ -1,8 +1,8 @@
-  {% extends 'layouts/base.html' %}
-  {% load static %}
+{% extends 'layouts/base.html' %}
+{% load static %}
 
 {% block title %}
-Transactions
+Bitcoin transactions
 {% endblock %}
 
 {% block styles %}
@@ -15,7 +15,8 @@ Transactions
 {% endblock %}
 
 {% block body %}
-<body style="text-align: center">
+<h1>Bitcoin transactions</h1>
+<body>
     <div class="container mb-3 mt-3">
         <table class="table table-striped row-border table-hover mydatatable" style="width: 100%">
             <thead>
@@ -40,7 +41,17 @@ Transactions
     </div>
     <p></p>
     <article>
-        <h2>Current time:{{current_time}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Current price:{{current_price}}</h2>
+    {% if fig_radar_chart %}
+    {{ fig_radar_chart|safe }}
+    {% else %}
+    <p>No graph was provided.</p>
+    {% endif %}
+    </article>
+    <article>
+    <h1><small>Biggest BTC transaction within 24h</small></h1>
+    <h2><small>hash:{{Biggest_tx_24h_hash}}</small></h2>
+    <h2><small>value(USD$):{{Biggest_tx_24h_value}}</small></h2>
+    <hr>
     {% if fig_cours_BTC %}
     {{ fig_cours_BTC|safe }}
     {% else %}

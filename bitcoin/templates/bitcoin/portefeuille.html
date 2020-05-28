@@ -10,21 +10,40 @@
 {% endblock %}
 
 {% block body %}
+<style type="text/css">
+  #infos{
+    display: inline-block;
+    width:20%;
+    margin-left: 5%;
+    margin-top: 3%;
+  }
+  #graphe_inputs{
+    margin-left: 4%;
+    display: inline-block;
+    width: 70%;
+  }
+  #cardbody{
+    text-align: center;
+  }
+  .card-header{
+    text-align: center;
+  }
+</style>
 
 <div class="card mb-3" id="infos">
-  <h3 class="card-header">Utilisateur</h3>
+  <h3 class="card-header">User</h3>
   <div class="card-body" id="cardbody">
   	{% for u in utilisateurs %}
-    <h5 class="card-title">Adresse : </h5>
+    <h5 class="card-title">Address : </h5>
    <p class="text-secondary">{{ u.adresse }}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Transactions : {{u.nb_tx}}</li>
-    <li class="list-group-item">Total reçu : {{u.total_recu}}</li>
-    <li class="list-group-item">Total envoyé : {{ u.total_envoye}}</li>
+    <li class="list-group-item">Total received: {{u.total_recu}}</li>
+    <li class="list-group-item">Total sent : {{ u.total_envoye}}</li>
   </ul>
   <div class="card-footer text-muted">
-    Solde final : {{ u.solde_final}}
+    Final balance : {{ u.solde_final}}
   </div>
   {% endfor%}
 </div>

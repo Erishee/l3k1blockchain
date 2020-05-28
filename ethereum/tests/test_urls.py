@@ -5,7 +5,7 @@ from ethereum.models import Utilisateur,Transactions
 
 """Test case utilisé pour tester les urls_ethereum."""
 class EthUrlTest(SimpleTestCase):
-
+    databases = '__all__'
     def test_url_ethereum_is_resolved(self):
         url = reverse('ethereum:ethereum')
         self.assertEquals(resolve(url).func, ethereum)

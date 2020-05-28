@@ -7,7 +7,7 @@ from datetime import date
 from bitcoin.models import Utilisateur, Bloc, Transactions, Inputs, Outputs
 from bitcoin.utilisateurs import Utilisateurs
 from bitcoin.transactions import Transaction
-from bitcoin.portefeuille import Portefeuille
+#from bitcoin.portefeuille import Portefeuille
 from django.conf import settings
 from django.urls import reverse
 

@@ -4,7 +4,7 @@ from django.urls import reverse,resolve
 
 """Test case utilisé pour tester les views accueil."""
 class Test_unitaire_accueil(TestCase):
-
+    multi_db = True
     def test_accueil_btc_view(self):
         client = Client()
         response = client.get(reverse('accueil:accueil_btc'))

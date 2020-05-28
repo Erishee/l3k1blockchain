@@ -3,6 +3,7 @@ from ethereum.models import Utilisateur,Transactions
 
 """Test case utilisé pour tester les ethereum models."""
 class Eth_ModelTest(TestCase):
+    databases = '__all__'
     @classmethod
     def setUp(self):
         Utilisateur.objects.create(address="test_adr_source",

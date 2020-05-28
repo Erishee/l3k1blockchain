@@ -10,16 +10,32 @@ from bokeh.io import show
 from bokeh.embed import file_html
 from bokeh.resources import CDN
 from datetime import datetime
+import plotly.graph_objs as go
 
 class Accueil:
+	#méthode qui renvoie le graphique du cours du bitcoin ou de l'ethereum
+	#paramètre: une chaîne de caractères ('BTC' ou 'ETH')
 	@staticmethod
 	def afficherCours(crypto):
 		if(crypto == 'BTC'):
 			data = pd.read_csv('./static/DataVisualisation/csv/BTC_USD_2013-10-01_2020-03-28-CoinDesk.csv')
 		if(crypto == 'ETH'):
 			data = pd.read_csv('./static/DataVisualisation/csv/ETH_USD_2015-08-09_2020-03-28-CoinDesk.csv')
-		graphe = plot([Scatter(x=data['Date'],y=data['Closing Price (USD)'],
-			mode='lines',name='test',opacity=0.8, marker_color='blue')],output_type='div')
+		fig=go.Figure()
+		scatter=go.Scatter(x=data['Date'],y=data['Closing Price (USD)'],mode='lines',name='test',opacity=0.8, marker_color='blue')
+		fig.add_trace(scatter)
+		fig.update_xaxes(rangeslider_visible=True,
+    		rangeselector=dict(
+        	buttons=list([
+	            dict(count=1, label="1m", step="month", stepmode="backward"),
+	            dict(count=6, label="6m", step="month", stepmode="backward"),
+	            dict(count=1, label="YTD", step="year", stepmode="todate"),
+	            dict(count=1, label="1y", step="year", stepmode="backward"),
+	            dict(step="all")
+        		])
+    		),
+		)
+		graphe=plot(fig,output_type='div')
 		return graphe
 
 
@@ -132,7 +148,7 @@ class Accueil:
 	def chord(data):
 		hv.extension('bokeh')
 		renderer=hv.renderer('bokeh')
-		hv.output(size=300)
+		hv.output(size=230)
 		links= pd.DataFrame(data['links'])
 		hv.Chord(links)
 		nodes=hv.Dataset(pd.DataFrame(data['nodes']), 'index')

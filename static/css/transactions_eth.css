@@ -2,3 +2,7 @@ div.dataTables_wrapper {
         width: auto;
         margin: 0 auto;
     }
+h1,h2{
+    padding-top:1%;
+    text-align: center;
+}

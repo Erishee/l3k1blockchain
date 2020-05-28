@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from bitcoin.models import Utilisateur, Bloc, Transactions, Inputs, Outputs
 from bitcoin.utilisateurs import Utilisateurs
 from bitcoin.transactions import Transaction
-from bitcoin.portefeuille import Portefeuille
+#from bitcoin.portefeuille import Portefeuille
 from django.urls import reverse
 
 """Test case utilisé pour tester views.py."""
@@ -77,6 +77,7 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code,200)
         self.assertTemplateUsed(response,'bitcoin/bitcoin.html')
 
+    """
     def test_portefeuille_view(self):
         client = Client()
 
@@ -84,14 +85,15 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code,200)
         self.assertTemplateUsed(response,'bitcoin/portefeuille.html')
+    """
 
     def test_blockchain_info_view(self):
         client = Client()
 
         response = client.get(reverse('bitcoin:blockchain_info'))
 
-        self.assertEquals(response.status_code,200)
-        self.assertTemplateUsed(response,'bitcoin/blockchain_info.html')
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'bitcoin/blockchain_info.html')
 
     def test_afficher_tx_view(self):
         client = Client()

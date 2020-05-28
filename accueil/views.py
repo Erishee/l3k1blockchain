@@ -8,7 +8,6 @@ from ethereum.ethusers import EthUsers
 
 # Create your views here.
 def accueilBTC(request):
-	ssl._create_default_https_context = ssl._create_unverified_context
 	graphe = home.Accueil.afficherCours('BTC')
 	ticker = exchangerates.get_ticker()
 	prix_BTC = ticker['USD'].p15min
@@ -30,6 +29,7 @@ def accueilETH(request):
 	graphe = home.Accueil.afficherCours('ETH')
 	utilisateurs=EthUsers.get_users()
 	echanges=EthUsers.echanges(utilisateurs)
+	echanges_index=EthUsers.echanges_index(echanges,utilisateurs)
 	data=EthUsers.valeurs(utilisateurs,echanges)
 	chord_graph=EthUsers.chord(data)
-	return render(request, 'accueil/accueil.html', {'graphe_div':graphe,'prix_ETH': prix_ETH,'chord_graph':chord_graph})
+	return render(request, 'accueil/accueil.html', {'graphe_div':graphe,'prix_ETH': prix_ETH,'chord_graph':chord_graph,"echanges":echanges_index})

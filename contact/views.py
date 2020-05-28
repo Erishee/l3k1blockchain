@@ -13,8 +13,8 @@ def contact(request):
 		contact.save()
 	return render(request,'contact/contact.html')
 
-def contact2(request):
-	return render(request, 'contact/contact.html')
-
 def about(request):
 	return render(request, 'contact/aboutus.html')
+
+def api_instruction(request):
+	return render(request, 'contact/api_instruction.html')
